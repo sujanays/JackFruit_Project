@@ -17,7 +17,7 @@ Approach:
 - Tkinter - to have a user friendly experience.
 
 Exceution: Run the file by usual method of clicking the play button or 
-           python JACKfruit.py
+           by running python JACKminiPrj.py in python terminal.
 
 Improvement: Needs precision in the context of time delay.
 

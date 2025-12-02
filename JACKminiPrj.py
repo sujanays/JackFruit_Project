@@ -74,7 +74,7 @@ def start_display():
     
 # To create tkinter window
 root = tk.Tk()
-root.geometry("")
+root.geometry("600x400")
 root.configure(bg="black")
 img=Image.open("mon.jpg")
 bg=ImageTk.PhotoImage(img)
@@ -90,3 +90,4 @@ tk.Button(root, text="Show Morse",bg="black",fg="white", command=start_display,f
 output_label = tk.Label(root, text="", bg="black",fg="white",font=("Courier", 24,"bold"))
 output_label.pack(pady=10)
 root.mainloop()
+

@@ -21,4 +21,4 @@ Exceution: Run the file by usual method of clicking the play button or
 
 Improvement: Needs precision in the context of time delay.
 
-Note: Add a image of your choice by replacing your image name with "mon.jpg" line - 79 placing the image file in the same directory where the morse code program is added to
+Note: Add an image of your choice by replacing your image name with "mon.jpg" line - 79 placing the image file in the same directory where the morse code program is added to.

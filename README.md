@@ -2,11 +2,11 @@
 Audio - Visual Morse code generator built in python with user friendly interface. 
 
 Build dependencies:
-1 - tkinter module
-2 - threading module
-3 - sounddevice module
-4 - numpy module
-5 - time module (Pre-installed in python)
+- tkinter module
+- threading module
+- sounddevice module
+- numpy module
+- time module (Pre-installed in python)
 
 Approach:
 - It uses a casual pre-stored dictionary that contains the morse codes of correspoding characters.

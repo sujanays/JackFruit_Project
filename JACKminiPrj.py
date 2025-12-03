@@ -1,5 +1,4 @@
 import tkinter as tk
-import threading
 import sounddevice as sd
 import numpy as np
 import time
@@ -90,3 +89,4 @@ tk.Button(root, text="Show Morse",bg="black",fg="white", command=start_display,f
 output_label = tk.Label(root, text="", bg="black",fg="white",font=("Courier", 24,"bold"))
 output_label.pack(pady=10)
 root.mainloop()
+

@@ -3,7 +3,6 @@ Audio - Visual Morse code generator built in python with user friendly interface
 
 Build dependencies:
 - tkinter module
-- threading module
 - sounddevice module
 - numpy module
 - time module (Pre-installed in python)
@@ -13,7 +12,6 @@ Approach:
 - Running a loop to form a string of morse codes for the given string.
 - Generating a sound i.e, a sine waveform and storing it in a variable so that it can be played
   when required for dot and dash.
-- Threading - to run audio and morse code simultaneouly.
 - Tkinter - to have a user friendly experience.
 
 Exceution: Run the file by usual method of clicking the play button or 

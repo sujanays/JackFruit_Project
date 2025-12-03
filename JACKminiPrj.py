@@ -19,19 +19,19 @@ MORSE_CODE = {
 # To create and store the audio of sin curve.
 sample_rate=44100;fq=1000
 t_dot = np.linspace(0, 200.0/1000.0, int(sample_rate * 200.0/1000.0 ), endpoint=False)
-t_dash = np.linspace(0, 600.0/1000.0, int(sample_rate * 600.0/1000.0), endpoint=False)
+t_dash = np.linspace(0, 400.0/1000.0, int(sample_rate * 400.0/1000.0), endpoint=False)
 dot_sound = np.sin(2 * np.pi * fq * t_dot).astype(np.float32)
 dash_sound = np.sin(2 * np.pi * fq * t_dash).astype(np.float32)
 
-# To play the corresponding audio when called and enhancing time by using threading concept
+# To play the corresponding audio when called and enhancing time by usinging concept
 def play_sound(c):
     if c == ".":
-        threading.Thread(target=lambda: sd.play(dot_sound, sample_rate,blocking=False)).start()
+        sd.play(dot_sound, sample_rate,blocking=False)
         output_label.config(text=displayed_text)    
     elif c == "-":
-        threading.Thread(target=lambda: sd.play(dash_sound, sample_rate,blocking=False)).start()
+        sd.play(dash_sound, sample_rate,blocking=False)
         output_label.config(text=displayed_text)  
-    sd.wait()
+    
 
 #To convert the given text into morse code 
 def text_to_morse(text):

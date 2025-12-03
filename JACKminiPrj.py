@@ -1,8 +1,8 @@
 import tkinter as tk
 import threading
-import sounddevice as sd
 import numpy as np
 import time
+import os
 from PIL import Image, ImageTk
 MORSE_CODE = {
     "A": ".-",     "B": "-...",   "C": "-.-.",   "D": "-..","E": ".",      "F": "..-.",   "G": "--.",    "H": "....",
@@ -15,21 +15,32 @@ MORSE_CODE = {
     ";": "-.-.-.","=": "-...-","+": ".-.-.","-": "-....-","_": "..--.-","\"": ".-..-.","$": "...-..-","@": ".--.-.",
     " ": "/"
 }
-
+fq=900
 # To create and store the audio of sin curve.
-sample_rate=44100;fq=800
-t_dot = np.linspace(0, 200.0/1000.0, int(sample_rate * 200.0/1000.0 ), endpoint=False)
-t_dash = np.linspace(0, 600.0/1000.0, int(sample_rate * 600.0/1000.0), endpoint=False)
-dot_sound = np.sin(2 * np.pi * fq * t_dot).astype(np.float32)
-dash_sound = np.sin(2 * np.pi * fq * t_dash).astype(np.float32)
+if os.name=="nt":
+    import winsound
+else:
+    import sounddevice as sd
+    sample_rate=44100
+    t_dot = np.linspace(0, 200.0/1000.0, int(sample_rate * 200.0/1000.0 ), endpoint=False)
+    t_dash = np.linspace(0, 600.0/1000.0, int(sample_rate * 600.0/1000.0), endpoint=False)
+    dot_sound = np.sin(2 * np.pi * fq * t_dot).astype(np.float32)
+    dash_sound = np.sin(2 * np.pi * fq * t_dash).astype(np.float32)
 
 # To play the corresponding audio when called and enhancing time by using threading concept
 def play_sound(c):
     if c == ".":
-        threading.Thread(target=lambda: sd.play(dot_sound, sample_rate,blocking=False)).start()    
+        if os.name=="nt":
+            threading.Thread(target=winsound.Beep(fq,200)).start()
+        else:
+            threading.Thread(target=lambda: sd.play(dot_sound, sample_rate,blocking=False)).start()
+            sd.wait()    
     elif c == "-":
-        threading.Thread(target=lambda: sd.play(dash_sound, sample_rate,blocking=False)).start()
-    sd.wait()
+        if os.name=="nt":
+            threading.Thread(target=winsound.Beep(fq,600)).start()
+        else:
+            threading.Thread(target=lambda: sd.play(dash_sound, sample_rate,blocking=False)).start()
+            sd.wait()
 
 #To convert the given text into morse code 
 def text_to_morse(text):
@@ -51,10 +62,11 @@ def display_morse(index=0):
     symbol = morse_string[index]
     displayed_text += symbol
     output_label.config(text=displayed_text)
+    
 
     if symbol == ".":       
         play_sound(symbol)
-        delay = 200
+        delay = 600
     elif symbol == "-":     
         play_sound(symbol)
         delay = 600
@@ -62,7 +74,6 @@ def display_morse(index=0):
         delay = 700
     else:
         delay=100
-
     root.after(delay, lambda: display_morse(index + 1))
 
 def start_display():
@@ -90,4 +101,3 @@ tk.Button(root, text="Show Morse",bg="black",fg="white", command=start_display,f
 output_label = tk.Label(root, text="", bg="black",fg="white",font=("Courier", 24,"bold"))
 output_label.pack(pady=10)
 root.mainloop()
-
